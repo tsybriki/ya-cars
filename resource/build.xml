@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<project name="finalize.assembly" default="" basedir="..">
+    <property name="resource.dir" value="${basedir}/resource"/>
+    <property name="deployment.base" value="${basedir}/out/artifacts"/>
+    <property name="zip.output.dir" value="${basedir}/out"/>
+
+    <fileset id="distribution.files" dir="${deployment.base}">
+        <include name="loader/*"/>
+        <include name="jre7/**/*"/>
+    </fileset>
+
+    <filelist id="startup.script" dir="${resource.dir}">
+        <file name="run.cmd"/>
+    </filelist>
+
+    <target name="finalize.assembly">
+        <echo message="${basedir}"/>
+        <zip destfile="${zip.output.dir}/ya.cars.zip">
+            <fileset refid="distribution.files"/>
+            <filelist refid="startup.script"/>
+        </zip>
+    </target>
+</project>
